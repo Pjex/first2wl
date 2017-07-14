@@ -29,12 +29,13 @@
 
 #else
 #define AND_LOG(...)
+#define PJ_LOG(...)  ALOGE(__VA_ARGS__)
 #define GL(x) x
 #define OBJ_CHECK(name, func)
 #endif
 
 
-static void check_gl_error(const char* file, const char* line)
+/*static void check_gl_error(const char* *file/, const char* *line/)
 {
 	char errorMsg[40];
 	GLenum error = glGetError();
@@ -58,19 +59,19 @@ static void check_gl_error(const char* file, const char* line)
 	case GL_OUT_OF_MEMORY:
 		strcpy(errorMsg, "GL_OUT_OF_MEMORY");
 		break;
-	/*case GL_STACK_UNDERFLOW:
+	*case GL_STACK_UNDERFLOW:
 		strcpy(errorMsg, "GL_STACK_UNDERFLOW");
 		break;
 	case GL_STACK_OVERFLOW:
 		strcpy(errorMsg, "GL_STACK_OVERFLOW");
-		break;*/
+		break;*
 	default:
 		sprintf(errorMsg, "Other: %d", error);
 		break;
 	}
 
 	AND_LOG("Error msg occured at line %s in the file %s: %s\n", line, file, errorMsg);
-}
+}*/
 
 #define POSITION 0
 #define TEXCOORD 1

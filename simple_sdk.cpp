@@ -250,9 +250,9 @@ extern "C"{
 		GLvoid* pointer;
 	}AttribDesc;
 
-	static void ogl_print_attrib_info(int index, const AttribDesc& info)
+	/*static void ogl_print_attrib_info(int *index*, const AttribDesc& info)
 	{
-		char* type_str = "Unkown";
+		const char* type_str = "Unkown";
 		switch (info.type)
 		{
 		case GL_BYTE: 
@@ -280,7 +280,7 @@ extern "C"{
 			(info.enabled ? "true":"false"), info.size, info.stride, type_str, 
 			(info.normalized ? "true" : "false"), (GLint)(info.pointer)
 			);
-	}
+	}*/
 
 	static void ogl_get_attrib_info(int index, AttribDesc& out)
 	{
@@ -432,7 +432,7 @@ extern "C"{
 	{
 		const int window_width = g_window_size.width;
 		const int window_height = g_window_size.height;
-		Matrix4 orthMat = ortho(0, +window_width, 0, +window_height, -1.0f, 1.0f);
+		//Matrix4 orthMat = ortho(0, +window_width, 0, +window_height, -1.0f, 1.0f);
 		GL(glViewport(0, 0, window_width, window_height));
 		GL(glUseProgram(g_program));
 		{
@@ -483,7 +483,7 @@ extern "C"{
 		}
 	}
 
-	void ogl_render(float elpsedTime)
+	void ogl_render(float /*elpsedTime*/)
 	{
 		/*
 		GL(glEnable(GL_DEPTH_TEST));
@@ -518,8 +518,8 @@ extern "C"{
 		GLboolean blend;
 		glGetBooleanv(GL_BLEND, &blend);
 
-		ogl_print_attrib_info(0, attrib_slot0);
-		ogl_print_attrib_info(1, attrib_slot1);
+		//ogl_print_attrib_info(0, attrib_slot0);
+		//ogl_print_attrib_info(1, attrib_slot1);
 
 		AND_LOG("The current Viewport = [%d, %d, %d, %d].\n", viewports[0], viewports[1], viewports[2], viewports[3]);
 		AND_LOG("The current framebuffer name = %d.\n", framebuffer);
