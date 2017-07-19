@@ -22,7 +22,8 @@ static const unsigned TAG_TEX_SIZE = 64;
 
 extern "C" void ogl_init();
 extern "C" void ogl_resize(int width, int height);
-extern "C" void ogl_set_projection(float fov, float near, float far);
+extern "C" void ogl_set_projection(float fov, float near, float far,float trans);//panjie set fov near far and trans,above 3 is perspective,
+//last is to trans screen position
 extern "C" void ogl_set_background_texture(int width, int height, int format, const char* pData);
 extern "C" void ogl_set_rect_texture(int width, int height, int format, const char* pData);
 extern "C" void ogl_read_texels_from_renderbuffer();

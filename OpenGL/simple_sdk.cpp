@@ -77,6 +77,7 @@ extern "C"{
 		g_projection.far = 100.0f;
 		g_projection.near = 0.1f;
 		g_projection.fov = 60.0f;
+		g_projection.trans = 0.5666f;
 
 		g_background_tex_id = empty_texture();
 		g_rect_texture_id = empty_texture();
@@ -103,11 +104,12 @@ extern "C"{
 		g_window_size.height = height;
 	}
 
-	void ogl_set_projection(float fov, float near, float far)
+	void ogl_set_projection(float fov, float near, float far, float trans)
 	{
-		g_projection.far = far;
-		g_projection.near = near;
-		g_projection.fov = fov;
+		if (far > 0) g_projection.far = far;
+		if (near > 0)g_projection.near = near;
+		if (fov > 0)g_projection.fov = fov;
+		if (trans > 0)g_projection.trans = trans;
 	}
 
 	void ogl_read_texels_from_renderbuffer()
@@ -297,7 +299,7 @@ extern "C"{
 		const int window_width = g_window_size.width;
 		const int window_height = g_window_size.height;
 
-		GL(glViewport(0, 0, window_width, window_height));
+		GL(glViewport(0, 0, window_width , window_height));//panjie test
 		if (g_fbo == NULL)
 		{
 			g_fbo_tex = empty_texture();
@@ -433,7 +435,7 @@ extern "C"{
 		const int window_width = g_window_size.width;
 		const int window_height = g_window_size.height;
 		//Matrix4 orthMat = ortho(0, +window_width, 0, +window_height, -1.0f, 1.0f);
-		GL(glViewport(0, 0, window_width, window_height));
+		GL(glViewport(0, 0, window_width , window_height ));//panjie test
 		GL(glUseProgram(g_program));
 		{
 			// render the fbo to left screen

@@ -99,12 +99,6 @@ extern "C"{
 
 		float img_x = (window.width - TAG_TEX_SIZE) / 2;
 		float img_y = (window.height - TAG_TEX_SIZE) / 2;
-                //const float *a = orthMat.get();
-                /*PJ_LOG("panjie orthMat :\n");
-                for (int i = 0;i < 16; i++){
-                    PJ_LOG("orthMat[%d] : %f",i, orthMat[i]);
-                }*/
-                //PJ_LOG("oglinit Create rect texture from renderbuffer.");
 
 		Matrix4 viewMat = identity();
 		viewMat.m00 = TAG_TEX_SIZE * 0.5f;
@@ -113,12 +107,13 @@ extern "C"{
 		viewMat.m31 = img_y + viewMat.m11;
 		render.tagMVP = mulMat(orthMat, viewMat);
 
-		Rect left_region = { 0, window.height / 4, window.width / 2, window.height / 2 };
-		viewMat.m00 = left_region.width * 0.5666f;//here is width point ,it contral screen translation
-		viewMat.m11 = left_region.height * 0.5f;//it height to ctrl screen up and down
-		viewMat.m30 = left_region.x + viewMat.m00 ;//panjie
-		viewMat.m31 = left_region.y + viewMat.m11 ;
+		Rect left_region = { 0/*left_region.x*/, /*0,*/window.height / 4,/*left_region.y*/window.width /2/*left_region.width*/, window.height/2 /*left_region.height*/ };
+		viewMat.m00 = left_region.width * 0.5f + proj.trans ;//0.5666f;//here is width point ,it contral screen translation 加是平移，乘是缩放
+		viewMat.m11 = left_region.height * 0.5f;//  + proj.trans * 2;//it height to ctrl screen up and down
+		viewMat.m30 = left_region.x + viewMat.m00 + proj.trans ;//panjie这里应该是左边移动多少右边也移动多少达到平移效果而不是拉伸
+		viewMat.m31 = left_region.y + viewMat.m11;// -  proj.trans * 2;
                 //const float *b = viewMat.get();
+		PJ_LOG("panjie left viewMat :left_region.width : %d, left_region.height:%d,left_region.x:%d,left_region.y:%d,window.height / 4:%d,window.width / 2:%d \n",left_region.width,left_region.height,left_region.x,left_region.y,window.height / 4,window.width / 2);
                 PJ_LOG("panjie left viewMat :\n");
                 int i =0;
                 //for (int i = 0;i < 16; i++){

@@ -29,7 +29,7 @@
 
 #else
 #define AND_LOG(...)
-#define PJ_LOG(...)  ALOGE(__VA_ARGS__)
+#define PJ_LOG(...)
 #define GL(x) x
 #define OBJ_CHECK(name, func)
 #endif
@@ -92,6 +92,7 @@ typedef struct Projection
 	float fov;
 	float near;
 	float far;
+	float trans;
 }Projection;
 
 typedef struct TextureGL
